@@ -75,34 +75,16 @@ import java.util.ArrayList;
 
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        
-        ArrayList<TreeNode> pathP = getPath(root, p);
-        ArrayList<TreeNode> pathQ = getPath(root, q);
-        TreeNode ancestor = null;
-        for (int i = 0; i < pathP.size() && i < pathQ.size(); i++) {
-            if (pathP.get(i) == pathQ.get(i)) {
-                ancestor = pathP.get(i);
+        TreeNode ancestor = root;
+        while (true) {
+            if (ancestor.val < p.val && ancestor.val < q.val) {
+                ancestor = ancestor.right;
+            } else if (ancestor.val > p.val && ancestor.val > q.val) {
+                ancestor = ancestor.left;
             } else {
-                break;
+                return ancestor;
             }
         }
-
-        return ancestor;
-    }
-
-    public ArrayList<TreeNode> getPath(TreeNode root, TreeNode target) {
-        
-        ArrayList<TreeNode> path = new ArrayList<>();
-        while (target != root) {
-            path.add(root);
-            if (target.val > root.val) {
-                root = root.right;
-            } else {
-                root = root.left;
-            }
-        }
-        path.add(root);
-        return path;
     }
 }
 // @lc code=end
