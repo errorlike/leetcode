@@ -65,24 +65,19 @@
  */
 class Solution {
     public boolean isBalanced(TreeNode root) {
-        if (getDepth(root) == -1) {
-            return false;
-        } else {
+        if (root == null) {
             return true;
         }
+        return isBalanced(root.left) && isBalanced(root.right)
+                && Math.abs(getDepth(root.left) - getDepth(root.right))<= 1;
     }
 
     public int getDepth(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        int leftDepth = getDepth(root.left);
-        int rightDepth = getDepth(root.right);
-
-        if (leftDepth == -1 || rightDepth == -1) {
-            return -1;
-        }
-        return Math.abs(leftDepth - rightDepth) <= 1 ? Math.max(leftDepth , rightDepth) + 1 : -1;
+        return Math.max(getDepth(root.left), getDepth(root.right)) + 1;
     }
 }
+
 // @lc code=end
