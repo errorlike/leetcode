@@ -41,38 +41,13 @@
 
 // @lc code=start
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+import java.util.Arrays;
 
 class Solution {
-    // 统计出现次数。
-    // 元素作为key, 出现次数作为value
-    // 遍历找到最大的那个
-    public Map<Integer, Integer> countNums(int[] nums) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int number : nums) {
-            if (!map.containsKey(number)) {
-                map.put(number, 1);
-            } else {
-                map.put(number, map.get(number) + 1);
-            }
-        }
-        return map;
-    }
-
+    // 相当于一个从最左端滑倒最右端。始终覆盖的元素。
     public int majorityElement(int[] nums) {
-        Map<Integer, Integer> countMap = countNums(nums);
-        int maxKey = 0;
-        int maxValue = 0;
-        for (Entry<Integer, Integer> entrySet : countMap.entrySet()) {
-            if (entrySet.getValue() > maxValue) {
-                maxKey = entrySet.getKey();
-                maxValue = entrySet.getValue();
-            }
-        }
-        return maxKey;
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
     }
 }
 // @lc code=end
