@@ -63,12 +63,13 @@ import java.util.List;
  */
 class Solution {
     public ListNode middleNode(ListNode head) {
-        List<ListNode> list = new ArrayList<>();
-        while (head != null) {
-            list.add(head);
-            head = head.next;
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        return list.get(list.size() / 2);
+        return slow;
     }
 }
 // @lc code=end
