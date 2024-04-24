@@ -55,7 +55,7 @@
 
 // @lc code=start
 
-import java.util.HashMap;
+import java.util.HashSet;
 
 class Solution {
     // 一个动态的滑动窗口。
@@ -63,23 +63,24 @@ class Solution {
     // 使用Set来判断是否重复。
     // 终止条件，end =length
     public int lengthOfLongestSubstring(String s) {
-        if (s.length() == 0) {
-            return 0;
-        }
-        HashMap<Character, Integer> hashMap = new HashMap<>();
+        int maxLength = 0;
         int start = 0;
-        int max = 0;
+        var set = new HashSet<Character>();
         for (int end = 0; end < s.length(); end++) {
-            if (hashMap.containsKey(s.charAt(end))) {
-                // 把重复字符的下一个字符作为start
-                // 没有删除start前put的值，所以需要进行比较。
-                start = Math.max(start, hashMap.get(s.charAt(end)) + 1);
+            var charactar = s.charAt(end);
+            if (set.add(charactar)) {
+                maxLength = Math.max(maxLength, end - start + 1);
+            } else {
+                // 减小窗口到窗口内没有重复项
+                while(!set.add(charactar)){
+                    set.remove(s.charAt(start));
+                    start ++;
+                }
+                set.add(charactar);
             }
-            max = Math.max(max, end - start + 1);
-            hashMap.put(s.charAt(end), end);
-
         }
-        return max;
+
+        return maxLength;
     }
 }
 // @lc code=end

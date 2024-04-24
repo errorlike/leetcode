@@ -48,22 +48,22 @@
  */
 
 // @lc code=start
-
 class Solution {
+    // 当end=nums.length的时候循环停止。
     public double findMaxAverage(int[] nums, int k) {
+        int start = 0;
         int sum = 0;
-        int maxSum = 0;
-        for (int i = 0; i < k; i++) {
-            sum += nums[i];
-        }
-        maxSum = sum;
-        for (int i = k; i < nums.length; i++) {
-            sum = sum - nums[i - k] + nums[i];
-            if (sum > maxSum) {
-                maxSum = sum;
+        int max = Integer.MIN_VALUE;
+        for (int end = 0; end < nums.length; end++) {
+            // 计算和。
+            sum += nums[end];
+            if (end - start == k - 1) {
+                max = Math.max(sum, max);
+                sum -= nums[start];
+                start += 1;
             }
         }
-        return 1.0 * maxSum / k;
+        return 1.0 * max / k;
     }
 }
 // @lc code=end
