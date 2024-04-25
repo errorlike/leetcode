@@ -2,11 +2,10 @@
     "editor.parameterHints.enabled": false,
     "editor.suggestOnTriggerCharacters": false,
     "editor.suggest.snippetsPreventQuickSuggestions": true,
-    "java.signatureHelp.enabled": false,
-    "java.signatureHelp.description.enabled": true,
     "editor.quickSuggestions": {
         "other": "off",
         "comments": "off",
         "strings": "off"
-    }
+    },
+    "java.debug.settings.onBuildFailureProceed": true,
 }
